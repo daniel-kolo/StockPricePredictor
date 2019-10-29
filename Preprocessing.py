@@ -1,4 +1,5 @@
 import sklearn.model_selection
+import pandas as pd
 
 class Preprocessing:
 
@@ -37,6 +38,8 @@ class Preprocessing:
             self.train_data = self.get_train_data()
             self.test_data = self.get_test_data()
             self.validate_data = self.get_validate_data()
+
+
 
     def get_train_data(self):
         pass
