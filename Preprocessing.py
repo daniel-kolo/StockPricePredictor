@@ -3,17 +3,10 @@ import pandas as pd
 
 class Preprocessing:
 
-    def __init__(self, stock_prices, multiple = False):
+    def __init__(self, stock_prices):
         self.stock_prices = stock_prices
-        self.multiple = multiple
-        self.stock_list = []
-
-        self.process_data()
 
     def process_data(self):
-
-        # Todo Serialize
-        # Todo check if data is alredy in serialized data
 
         #self.X_train, \
         #self.X_test, \
@@ -39,16 +32,3 @@ class Preprocessing:
             self.test_data = self.get_test_data()
             self.validate_data = self.get_validate_data()
 
-
-
-    def get_train_data(self):
-        pass
-
-    def get_test_data(self):
-        pass
-
-    def get_validate_data(self):
-        pass
-
-    def serialize_data(self):
-        pass
