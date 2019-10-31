@@ -15,7 +15,7 @@ if __name__ == "__main__":
     finance_data_manager = FinanceDataManager("AAPL", start = "2003-01-01", end = "2017-01-01")
     prices = finance_data_manager.get_prices()
 
-    prep = Preprocessing("stock_prices.csv", 0.9)
+    prep = Preprocessing("stock_prices2.csv", 0.9)
     prep.gen_train(10)
     prep.gen_test(10)
 

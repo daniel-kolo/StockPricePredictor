@@ -25,7 +25,7 @@ class LSTM_Network:
     def evaluate(self):
         print(self.model.evaluate(self.X_test, self.Y_test))
 
-        data = pdr.get_data_yahoo("AAPL", "2017-12-19", "2018-01-03")
+        data = pdr.get_data_yahoo("AAPL", "2019-10-17", "2019-10-31")
         stock = data["Adj Close"]
         X_predict = np.array(stock).reshape((1, 10, 1)) / 200
 
