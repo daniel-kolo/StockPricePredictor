@@ -1,34 +1,34 @@
 import sklearn.model_selection
 import pandas as pd
-
+import numpy as np
 class Preprocessing:
 
-    def __init__(self, stock_prices):
-        self.stock_prices = stock_prices
+    def __init__(self, file, train):
+        self.file = pd.read_csv(file)
+        self.train = train
+        self.i = int(self.train * len(self.file))
+        self.stock_train = self.file[0: self.i]
+        self.stock_test = self.file[self.i:]
+        self.input_train = []
+        self.output_train = []
+        self.input_test = []
+        self.output_test = []
 
-    def process_data(self):
+    def gen_train(self, seq_len):
+        for i in range((len(self.stock_train) // seq_len) * seq_len - seq_len - 1):
+            x = np.array(self.stock_train.iloc[i: i + seq_len, 1])
+            y = np.array([self.stock_train.iloc[i + seq_len + 1, 1]], np.float64)
+            self.input_train.append(x)
+            self.output_train.append(y)
+        self.X_train = np.array(self.input_train)
+        self.Y_train = np.array(self.output_train)
 
-        #self.X_train, \
-        #self.X_test, \
-        #self.y_train, \
-        #self.y_test = sklearn.model_selection.train_test_split(self.stock_prices, train_size=0.9)
-        train, test = sklearn.model_selection.train_test_split(self.stock_prices, train_size=0.9, shuffle = False)
-
-        print(train)
-        print(test)
-
-        return
-        # Determine if single stock or not
-        if self.multiple:
-            stock_names = self.stock_prices.name.unique()
-            for element in stock_names:
-                df = self.stock_prices[self.stock_prices['name'] == element]
-                train_data = self.get_train_data(df)
-                test_data = self.get_test_data(df)
-                validate_data = self.get_validate_data(df)
-
-        else:
-            self.train_data = self.get_train_data()
-            self.test_data = self.get_test_data()
-            self.validate_data = self.get_validate_data()
+    def gen_test(self, seq_len):
+        for i in range((len(self.stock_test) // seq_len) * seq_len - seq_len - 1):
+            x = np.array(self.stock_test.iloc[i: i + seq_len, 1])
+            y = np.array([self.stock_test.iloc[i + seq_len + 1, 1]], np.float64)
+            self.input_test.append(x)
+            self.output_test.append(y)
+        self.X_test = np.array(self.input_test)
+        self.Y_test = np.array(self.output_test)
 

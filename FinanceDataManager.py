@@ -25,5 +25,5 @@ class FinanceDataManager:
         return df['Close']
 
     def serialize(self, stock_df, filename):
-        pd.to_csv("./data/raw/{}.csv".format(filename), stock_df, index = False, sep =",")
+        stock_df.to_csv("./data/raw/{}.csv".format(filename), index = False, sep =",")
 
