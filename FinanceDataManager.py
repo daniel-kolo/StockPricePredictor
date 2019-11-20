@@ -24,6 +24,7 @@ class FinanceDataManager:
 
         return df['Close']
 
+
     def serialize(self, stock_df, filename):
         stock_df.to_csv("./data/raw/{}.csv".format(filename), index = False, sep =",")
 
