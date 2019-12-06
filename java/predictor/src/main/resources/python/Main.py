@@ -6,16 +6,10 @@ from Predictor import Predictor
 import datetime
 
 import tensorflow as tf
+import csv
 
 if __name__ == "__main__":
-    #sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-    #exit()
-
-    #from keras import backend as K
-    #K.tensorflow_backend._get_available_gpus()
-
     start_time = datetime.datetime.now()
-
     data_manager = FinanceDataManager()
     #prices = data_manager.get_prices(stock_name="FB", start = "2000-01-01", end = "2019-10-01")
     #predictor = Predictor(prices)
@@ -25,6 +19,13 @@ if __name__ == "__main__":
     end = datetime.datetime(2019,10,1)
 
     count =0
+
+    ticker_list = data_manager.get_sp500_tickers()
+    with open("../tickers.csv", 'w') as myfile:
+        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr.writerow(ticker_list)
+
+    exit()
 
     for element in data_manager.get_sp500_tickers():
         if element == None or type(element) == None:
