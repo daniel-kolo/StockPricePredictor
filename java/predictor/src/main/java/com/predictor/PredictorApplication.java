@@ -1,6 +1,7 @@
 package com.predictor;
 
 import com.predictor.DTO.UserDTO;
+import com.predictor.domain.TickerManager;
 import com.predictor.domain.User;
 import com.predictor.repo.UserRepository;
 import com.predictor.security.JwtUserDetailsService;
@@ -20,6 +21,9 @@ public class PredictorApplication implements CommandLineRunner {
     @Autowired
     UserRepository userRepo;
 
+    @Autowired
+    TickerManager tickerManager;
+
     public static void main(String[] args) {
         SpringApplication.run(PredictorApplication.class, args);
     }
@@ -29,7 +33,7 @@ public class PredictorApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user = new User("example@example.com", "pass");
         userDetailsService.save(new UserDTO(user));
-        System.out.println(userRepo.findAll());
+        System.out.println(tickerManager.getTickers());
     }
 
 }
