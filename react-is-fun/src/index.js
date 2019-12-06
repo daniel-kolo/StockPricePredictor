@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Login from "./containers/Login";
 import axios from 'axios';
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 class Message extends React.Component{
     render(){
@@ -38,14 +40,42 @@ class TickerList extends React.Component{
         return (
             <div>
                 <p>Hello World</p>
+                
             </div>
         )
+    }
+}
+
+class Test extends React.Component{
+    constructor() {
+        super()
+    }
+    render(){
+        return (
+            <div>
+                <p>Hello World</p>
+                
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Dropdown Button
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                
+            </div>
+        )               
     }
 }
 
 ReactDOM.render(
     //<Message color="blue" msg="How are you?" minutes={5} />,
     //<Login/>,
-    <TickerList/>,
+    //<TickerList/>,
+    <Test/>,
     document.getElementById('root')
 )
