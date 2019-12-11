@@ -14,6 +14,12 @@ export default function Login(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    getToken();
+  }
+
+  function getToken(){
+    console.log(this.state.email);
+    console.log(this.state.password);
   }
 
   return (
