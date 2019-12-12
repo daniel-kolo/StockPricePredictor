@@ -33,7 +33,6 @@ public class PredictorApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user = new User("example@example.com", "pass");
         userDetailsService.save(new UserDTO(user));
-        System.out.println(tickerManager.getTickers());
     }
 
 }

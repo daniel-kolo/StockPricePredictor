@@ -24,7 +24,6 @@ export default class Registration extends Component{
 
     handleSubmit(event){
         axios.post("http://localhost:8080/register",
-        
         { user: {
             email: this.state.email,
             password: this.state.password

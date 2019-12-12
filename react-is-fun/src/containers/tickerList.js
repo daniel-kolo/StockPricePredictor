@@ -13,8 +13,14 @@ export default class TickerList extends React.Component{
     }
     
     componentWillMount() {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhc2RAYXNkLmNvbSIsImV4cCI6MTU3NjA5NTc2OSwiaWF0IjoxNTc2MDc3NzY5fQ.aqZQPP7sibkGuCfYTwAmZxBocrJk8PaFYMqGXuSPHvOsrs9VLVd_I1blFFTvQh3OzdY-GuYAG6fyNA9-gc6vmA'
+          }
+
         axios.get("http://localhost:8080/tickerList",
-        { headers: {'Content-Type': 'application/json'}}).then(res => {
+        { headers: headers }).then(res => {
             let data = res.data[0].split(",")
             const tickers = data.map((ticker,index) =>
             <Dropdown.Item href={ticker} key={index}  >{ticker}</Dropdown.Item>

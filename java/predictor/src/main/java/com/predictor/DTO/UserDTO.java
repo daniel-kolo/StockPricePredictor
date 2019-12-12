@@ -12,8 +12,8 @@ public class UserDTO {
         this.password = user.getPassword();
     }
 
-    public UserDTO(String emai, String password) {
-        this.email = emai;
+    public UserDTO(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 

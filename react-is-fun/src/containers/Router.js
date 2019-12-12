@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./Login"
 import TickerList from "./tickerList.js"
 import Registration from "./Registration"
+//import Login from "./Newlogin"
 
 const RouterElement = () => (
   <Router>
@@ -10,7 +11,7 @@ const RouterElement = () => (
       <ul>
         <li>
           <Link to="/">Login</Link>
-        </li>
+        </li>   
         <li>
           <Link to="/about">Stock picker</Link>
         </li>

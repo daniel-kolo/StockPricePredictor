@@ -1,6 +1,16 @@
 package com.predictor.controller;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.predictor.DTO.UserDTO;
+import com.predictor.domain.User;
+
+import com.predictor.repo.UserRepository;
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +23,7 @@ import com.predictor.security.JwtUserDetailsService;
 import com.predictor.security.JwtTokenUtil;
 import com.predictor.security.model.JwtRequest;
 import com.predictor.security.model.JwtResponse;
+
 
 @RestController
 @CrossOrigin
@@ -27,19 +38,30 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    UserRepository userRepo;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(user));
+    public ResponseEntity<?> saveUser(@RequestBody String user) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode actualObj = mapper.readTree(user);
+        JsonNode jsonNodeUser = actualObj.get("user");
+        UserDTO userDTO = new UserDTO(jsonNodeUser.get("email").toString().split("\"")[1]
+                                        ,jsonNodeUser.get("password").toString().split("\"")[1]);
+         return ResponseEntity.ok(userDetailsService.save(userDTO));
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody String authenticationRequest) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode actualObj = mapper.readTree(authenticationRequest);
+        JsonNode jsonNodeUser = actualObj.get("request");
+        UserDTO userDTO = new UserDTO(jsonNodeUser.get("email").toString().split("\"")[1]
+                ,jsonNodeUser.get("password").toString().split("\"")[1]);
 
-        System.out.println(authenticationRequest.getEmail() + " "+  authenticationRequest.getPassword());
-        authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+        authenticate(userDTO.getEmail(), userDTO.getPassword());
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getEmail());
+                .loadUserByUsername(userDTO.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
