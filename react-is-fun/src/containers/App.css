@@ -1,13 +1,14 @@
+
 .App{
     text-align: center;
 }
 
-Nav{
+nav{
     display:flex;
     justify-content: space-around;
     align-items: center;
     min-height: 10vh;
-    background: rgb(48, 182, 226);
+    background: rgb(28, 193, 199);
     color: white;
 
 }

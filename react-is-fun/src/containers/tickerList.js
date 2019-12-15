@@ -44,8 +44,9 @@ export default class TickerList extends Component{
     render(){
 
         //console.log(this.state.tickers)
-
-        return (
+        
+        if (this.props.loggedInStatus=="LOGGED_IN"){
+            return (
                 <div>
                     <h1>Choose a stock to predict</h1>
                     <Dropdown>
@@ -59,6 +60,14 @@ export default class TickerList extends Component{
                     </Dropdown>
                     
                 </div>
-        )
+            )
+        } else{
+            return(
+                <div>
+                    <h1>Please, log in.</h1>
+                </div>
+            )
+        }
+        
     }
 }

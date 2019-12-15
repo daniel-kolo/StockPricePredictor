@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
+import "./Login.css"
 
 export default class Login extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ export default class Login extends Component {
         ).then(response => {
             //console.log(response.data.token);
             this.props.handleLogin(response)
+            this.props.history.push("/predict");
         }).catch(error => {
             console.log(error);
         });
@@ -39,7 +42,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form">
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
@@ -59,7 +62,7 @@ export default class Login extends Component {
             required
           />
 
-          <button type="submit">Login</button>
+          <button type="submit" className="button">Login</button>
         </form>
       </div>
     );

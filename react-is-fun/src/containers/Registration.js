@@ -30,6 +30,7 @@ export default class Registration extends Component{
           }}
         ).then(response => {
             console.log(response);
+            this.props.history.push("/login");
         }).catch(error => {
             console.log(error);
         });
@@ -39,7 +40,7 @@ export default class Registration extends Component{
     render(){
         return (<div>
 
-            <form onSubmit={this.handleSubmit}>
+            <form className="form" onSubmit={this.handleSubmit}>
                 <input 
                     type="email" 
                     name = "email" 
