@@ -17,8 +17,6 @@ public class TickerController {
     @Autowired
     TickerManager tickerManager;
 
-
-
     @GetMapping(value = "/tickerList")
     public String getTickerList(){
         System.out.println("ticker request");
@@ -31,6 +29,9 @@ public class TickerController {
 
         return new Gson().toJson(returnList );
     }
+
+
+
 
 
 

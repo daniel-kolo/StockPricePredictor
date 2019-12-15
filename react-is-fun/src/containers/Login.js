@@ -11,8 +11,6 @@ export default class Login extends Component {
       loginErrors: ""
     };
 
-    
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -36,7 +34,7 @@ export default class Login extends Component {
             console.log(error);
         });
         event.preventDefault();
-    
+
   }
 
   render() {

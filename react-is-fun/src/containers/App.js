@@ -4,6 +4,7 @@ import TickerList from "./tickerList.js"
 import Registration from "./Registration"
 import Nav from "./Nav";
 import {BrowserRouter as Router ,Switch, Route} from 'react-router-dom'; 
+import Prediction from "./Prediction"
 
 export default class App extends Component {
   constructor() {
@@ -11,13 +12,22 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      token: ""
+      token: "",
+      predicted: false,
+      ticker: ""
     };
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
 
   }
+
+
+  handleOnClick(ticker){
+    this.setState({predicted: true, ticker: ticker});
+  }
+
    /*
   checkLoginStatus() {
     axios
@@ -93,7 +103,16 @@ export default class App extends Component {
             />
             <Route path="/predict" render={props =>(
               <TickerList {...props}
+                handleOnClick = {this.handleOnClick}
                 loggedInStatus={this.state.loggedInStatus}
+                token = {this.state.token}
+              />
+              )}
+            />
+            <Route path="/prediction" render={props =>(
+              <Prediction {...props}
+                predicted= {this.state.predicted}
+                ticker = {this.state.ticker}
                 token = {this.state.token}
               />
               )}
