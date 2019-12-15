@@ -11,6 +11,8 @@ export default class Login extends Component {
       loginErrors: ""
     };
 
+    
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -28,11 +30,13 @@ export default class Login extends Component {
             password: this.state.password
           }}
         ).then(response => {
-            console.log(response.data.token);
+            //console.log(response.data.token);
+            this.props.handleLogin(response)
         }).catch(error => {
             console.log(error);
         });
         event.preventDefault();
+    
   }
 
   render() {

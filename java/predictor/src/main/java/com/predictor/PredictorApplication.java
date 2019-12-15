@@ -31,7 +31,7 @@ public class PredictorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("example@example.com", "pass");
+        User user = new User("asd@asd.com", "asd");
         userDetailsService.save(new UserDTO(user));
     }
 

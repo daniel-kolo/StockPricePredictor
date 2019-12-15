@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
-
 import Login from "./Login"
 import TickerList from "./tickerList.js"
 import Registration from "./Registration"
-import RouterElement from "./Router";
-import { directive } from "@babel/types";
-
 import Nav from "./Nav";
-import {BrowserRouter as Router ,Link, Switch, Route} from 'react-router-dom'; 
+import {BrowserRouter as Router ,Switch, Route} from 'react-router-dom'; 
 
 export default class App extends Component {
   constructor() {
@@ -16,11 +11,12 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      token: ""
     };
 
-    //this.handleLogin = this.handleLogin.bind(this);
-    //this.handleLogout = this.handleLogout.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+
   }
    /*
   checkLoginStatus() {
@@ -56,15 +52,52 @@ export default class App extends Component {
 
   */
 
+  handleLogout() {
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {}
+    });
+  }
+
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: "LOGGED_IN",
+      token: data.data.token
+    });
+
+    console.log("logged in succesfully");
+  }
+
   render(){
     return(
       <Router>
         <div className = "App">
           <Nav/>
           <Switch>
-            <Route path="/" exact component ={Registration}/>
-            <Route path="/login" component ={Login}/>
-            <Route path="/predict" component ={TickerList}/>
+            <Route path="/" exact render= {props => (
+                <Registration
+                  {...props}
+                  handleLogin={this.handleLogin}
+                  handleLogout={this.handleLogout}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+                )}
+            />
+            <Route path="/login" render={props =>(
+              <Login {...props}
+                handleLogin={this.handleLogin}
+                handleLogout={this.handleLogout}
+                loggedInStatus={this.state.loggedInStatus}
+              />
+              )}
+            />
+            <Route path="/predict" render={props =>(
+              <TickerList {...props}
+                loggedInStatus={this.state.loggedInStatus}
+                token = {this.state.token}
+              />
+              )}
+            />
           </Switch>
         </div>
       </Router>

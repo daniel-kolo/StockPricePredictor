@@ -1,17 +1,28 @@
 import React from "react";
-import Login from "./Login";
-import Registration from "./Registration"
-import TickerList from "./tickerList"
+import {Link } from "react-router-dom";
 
 function Nav(){
+
+    const navStyle={
+        color:'black'
+    };
+
     return(
     <nav>
         <h3>Logo</h3>
 
         <ul className="nav-links">
-            <li>Register</li>
-            <li>Login</li>
-            <li>Predict</li>
+            <Link style={navStyle} to="/">
+                <li>Register</li>
+            </Link>
+
+            <Link style={navStyle} to="/login">
+                <li>Login</li>
+            </Link>
+
+            <Link style={navStyle} to="/predict">
+                <li>Predict</li>
+            </Link>
         </ul>
     </nav>
     );
