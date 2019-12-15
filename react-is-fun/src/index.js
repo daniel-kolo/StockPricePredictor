@@ -8,14 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { tsParenthesizedType } from '@babel/types'
 import RouterElement from "./containers/Router"
 import Registration from "./containers/Registration"
+import App from './containers/App'
 
 ReactDOM.render(
-    //<Message color="blue" msg="How are you?" minutes={5} />,
-    //<Login/>,
-    
-    
-    <RouterElement/>,
-    
-    //<Registration/>,
+    <App/>,
     document.getElementById('root')
 )
