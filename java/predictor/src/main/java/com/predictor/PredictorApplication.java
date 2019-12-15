@@ -38,7 +38,6 @@ public class PredictorApplication implements CommandLineRunner {
         User user = new User("asd@asd.com", "asd");
         userDetailsService.save(new UserDTO(user));
 
-
     }
 
 }

@@ -2,6 +2,7 @@ package com.predictor.domain;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -76,5 +77,14 @@ public class PredictionManager {
         return pred;
     }
 
+    @Scheduled(fixedRate = 14400000)
+    public void refresh(){
+        System.out.println("Running python ML script");
+        try {
+            Runtime.getRuntime().exec("python /python/Main.py");
+        }catch (IOException  e){
+            System.out.println(e);
+        }
+    }
 
 }
